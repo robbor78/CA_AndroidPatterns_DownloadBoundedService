@@ -37,6 +37,9 @@ public class DownloadBoundServiceSync extends Service {
      * This implementation plays the role of Invoker in the Broker
      * Pattern
      */
+
+    private DownloadBoundServiceSync outer = this;
+
     DownloadCall.Stub mDownloadCallImpl = new DownloadCall.Stub() {
             /**
              * Download the image at the given Uri and return a
@@ -51,8 +54,7 @@ public class DownloadBoundServiceSync extends Service {
                 // download the file using the appropriate helper
                 // method in DownloadUtils and then return the
                 // pathname back to the client.
-                //return DownloadUtils.downloadFile(this,uri);
-                return null;
+                return DownloadUtils.downloadFile(outer,uri);
             }
 	};
 	
@@ -76,6 +78,9 @@ public class DownloadBoundServiceSync extends Service {
         Log.d(DownloadBoundServiceSync.class.getSimpleName(), "Making sync intent...");
         // TODO - replace the null to create the appropriate Intent
         // and return it to the caller.
-        return null;
+
+        Intent intent = new Intent(context, DownloadBoundServiceSync.class);
+
+        return intent;
     }
 }

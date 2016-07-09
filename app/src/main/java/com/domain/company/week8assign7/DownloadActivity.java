@@ -77,7 +77,9 @@ public class DownloadActivity extends DownloadBase {
             // service parameter into an interface that can be
             // used to make RPC calls to the Service.
 
-            mDownloadCall = (DownloadCall)service;
+            Log.d(TAG, service.getClass().toString());
+
+            mDownloadCall = DownloadCall.Stub.asInterface(service);
         }
 
         /**
@@ -110,7 +112,10 @@ public class DownloadActivity extends DownloadBase {
             // service parameter into an interface that can be
             // used to make RPC calls to the Service.
 
-            mDownloadRequest = null;
+            Log.d(TAG, service.getClass().toString());
+
+
+            mDownloadRequest = DownloadRequest.Stub.asInterface(service);
         }
 
         /**
@@ -146,7 +151,15 @@ public class DownloadActivity extends DownloadBase {
             // sendPath().  Please use displayBitmap() defined in
             // DownloadBase.
 
-            Runnable displayRunnable = null;
+            Runnable displayRunnable = new Runnable() {
+                @Override
+                public void run() {
+
+                    Log.d(TAG,"callback");
+
+                    displayBitmap(imagePathname);
+                }
+            };
         }
     };
 
@@ -166,9 +179,8 @@ public class DownloadActivity extends DownloadBase {
                 try {
                     String pathname = mDownloadCall.downloadImage(uri);
                     displayBitmap(pathname);
-                }
-                catch (RemoteException re) {
-                    Log.e(TAG,re.getMessage(),re);
+                } catch (RemoteException re) {
+                    Log.e(TAG, "Sync " + re.getMessage(), re);
                 }
                 break;
 
@@ -176,6 +188,11 @@ public class DownloadActivity extends DownloadBase {
                 // TODO - You fill in here to call downloadImage() on
                 // mDownloadRequest, passing in the appropriate Uri and
                 // callback.
+                try {
+                    mDownloadRequest.downloadImage(uri, mDownloadCallback);
+                } catch (RemoteException re) {
+                    Log.e(TAG, "Async " + re.getMessage(), re);
+                }
                 break;
         }
     }

@@ -19,7 +19,7 @@ import android.util.Log;
  *        Services can access them without redefining them in each
  *        Service.
  */
-public class DownloadUtils {
+public class  DownloadUtils {
     /**
      * Used for debugging.
      */
