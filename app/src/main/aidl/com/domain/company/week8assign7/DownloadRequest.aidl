@@ -1,6 +1,6 @@
-package edu.vuum.mocca;
+package com.domain.company.week8assign7;
 
-import edu.vuum.mocca.DownloadCallback;
+import com.domain.company.week8assign7.DownloadCallback;
 
 /**
  * @class DownloadRequest

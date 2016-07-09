@@ -1,4 +1,4 @@
-package edu.vuum.mocca;
+package com.domain.company.week8assign7;
 
 /**
  * @class DownloadCall
