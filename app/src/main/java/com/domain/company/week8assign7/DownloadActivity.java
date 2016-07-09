@@ -77,7 +77,7 @@ public class DownloadActivity extends DownloadBase {
             // service parameter into an interface that can be
             // used to make RPC calls to the Service.
 
-            mDownloadCall = null;
+            mDownloadCall = (DownloadCall)service;
         }
 
         /**
@@ -163,6 +163,13 @@ public class DownloadActivity extends DownloadBase {
             case R.id.bound_sync_button:
                 // TODO - You fill in here to use mDownloadCall to
                 // download the image & then display it.
+                try {
+                    String pathname = mDownloadCall.downloadImage(uri);
+                    displayBitmap(pathname);
+                }
+                catch (RemoteException re) {
+                    Log.e(TAG,re.getMessage(),re);
+                }
                 break;
 
             case R.id.bound_async_button:
@@ -179,6 +186,7 @@ public class DownloadActivity extends DownloadBase {
      */
     @Override
     public void onStart() {
+
         super.onStart();
 
         // Bind this activity to the DownloadBoundService* Services if

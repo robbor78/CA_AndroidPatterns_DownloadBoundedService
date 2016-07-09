@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 /**
  * @class DownloadBoundServiceSync
@@ -50,6 +51,7 @@ public class DownloadBoundServiceSync extends Service {
                 // download the file using the appropriate helper
                 // method in DownloadUtils and then return the
                 // pathname back to the client.
+                //return DownloadUtils.downloadFile(this,uri);
                 return null;
             }
 	};
@@ -71,6 +73,7 @@ public class DownloadBoundServiceSync extends Service {
      * @param context		The context of the calling component.
      */
     public static Intent makeIntent(Context context) {
+        Log.d(DownloadBoundServiceSync.class.getSimpleName(), "Making sync intent...");
         // TODO - replace the null to create the appropriate Intent
         // and return it to the caller.
         return null;

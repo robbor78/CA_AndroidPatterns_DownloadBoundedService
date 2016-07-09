@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 /**
  * @class DownloadBoundServiceAsync
@@ -73,6 +74,8 @@ public class DownloadBoundServiceAsync extends Service{
      * @param context		The context of the calling component.
      */
     public static Intent makeIntent(Context context) {
+        Log.d(DownloadBoundServiceAsync.class.getSimpleName(), "Making Async intent...");
+
         // TODO - replace the null to create the appropriate Intent
         // and return it to the caller.
         return null;
